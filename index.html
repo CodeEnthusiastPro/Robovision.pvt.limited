@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <title>Robovision</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif; /* Default font */
+        background: url('assets/bg.png') no-repeat center center fixed; /* Background image */
+        background-size: cover; /* Cover the entire viewport */
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* Ensures the body takes at least the full viewport height */
+        scroll-behavior: smooth; /* Smooth scrolling */
+      }
+
+      /* Navigation styles */
+      nav {
+        background-color: rgba(0, 0, 0, 0.8); /* Dark background for navbar */
+        padding: 20px;
+      }
+
+      nav a {
+        color: #ff4081; /* Pink color for links */
+        text-decoration: none; /* Remove underline */
+        padding: 10px 15px; /* Add padding for link */
+        transition: color 0.3s; /* Smooth color transition on hover */
+      }
+
+      nav a:hover {
+        color: #800080; /* Darker pink on hover */
+      }
+
+      /* Header styles */
+      .header__container {
+        position: relative;
+        color: white; /* White text color for header */
+        text-align: center; /* Center the text */
+        padding: 80px 20px; /* Padding for the header */
+        background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+      }
+
+      .header__image img {
+        width: 100%; /* Responsive image */
+        height: auto; /* Maintain aspect ratio */
+      }
+
+      .header__content {
+        position: relative; /* Positioning for text on image */
+        z-index: 1; /* Ensure text appears above the image */
+      }
+
+      .header__content h1 {
+        font-size: 3rem; /* Larger font size for the main title */
+        margin: 20px 0; /* Margin for spacing */
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /* Text shadow for better visibility */
+      }
+
+      .header__content h2 {
+        font-size: 2rem; /* Medium font size for subtitle */
+        margin: 10px 0; /* Margin for spacing */
+      }
+
+      .header__content p {
+        font-size: 1.2rem; /* Font size for paragraph */
+        line-height: 1.5; /* Increased line height for readability */
+        margin: 10px 0; /* Margin for spacing */
+      }
+
+      /* About section styles */
+      .about-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 80px 20px; /* More padding for larger space */
+        flex-grow: 1; /* Allow the about section to grow and take available space */
+      }
+
+      .about-card {
+        background-color: #800080; /* Pink background color */
+        color: white; /* White text color */
+        padding: 50px; /* Increased padding inside the card */
+        border-radius: 25px; /* Rounded corners */
+        width: 90%; /* Width of the card */
+        max-width: 1000px; /* Increased max width of the card */
+        text-align: center; /* Center the text */
+        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+        transition: transform 0.3s; /* Smooth transform transition */
+        font-family: 'Arial', sans-serif; /* Font for the card text */
+      }
+
+      .about-card:hover {
+        transform: scale(1.05); /* Scale up on hover */
+      }
+
+      .about-card h2 {
+        font-size: 2.5rem; /* Larger font size for the heading */
+        margin-bottom: 20px; /* Spacing below the heading */
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Text shadow for better visibility */
+      }
+
+      .about-card p {
+        font-size: 1.2rem; /* Larger font size for paragraphs */
+        line-height: 1.6; /* Increased line height for readability */
+        margin: 10px 0; /* Spacing between paragraphs */
+        text-align: justify; /* Justify text for better alignment */
+      }
+
+      /* Footer styles */
+      footer {
+        background-color: rgba(0, 0, 0, 0.8); /* Dark background for footer */
+        padding: 20px;
+        text-align: center; /* Center the text in the footer */
+        color: white; /* White text for footer */
+      }
+
+      /* Social media styles */
+      .socials {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        margin: 10px 0; /* Margin for spacing */
+      }
+
+      .socials li {
+        margin: 0 10px; /* Space between icons */
+      }
+
+      .socials a {
+        color: #800080; /* Pink color for social media icons */
+        font-size: 1.5rem; /* Icon size */
+        text-decoration: none; /* Remove underline */
+      }
+
+      .socials a:hover {
+        color: #800080; /* Darker pink on hover */
+      }
+
+      .header__btn .btn {
+        background-color: #800080; /* Pink background color */
+        color: white; /* White text color */
+        border: none; /* Remove default border */
+        padding: 15px 30px; /* Adjust padding for button size */
+        border-radius: 25px; /* Rounded corners for a pill shape */
+        font-size: 1rem; /* Font size */
+        cursor: pointer; /* Pointer cursor on hover */
+        transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+        text-decoration: none; /* Remove underline from anchor */
+        display: inline-block; /* Inline-block for proper sizing */
+      }
+
+      .header__btn .btn:hover {
+        background-color: #800080; /* Darker pink on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav__header">
+        <div class="nav__logo">
+          <a href="#">
+            <img src="assets/logo.png" alt="logo" />
+            <span>Robovision Private Limited</span>
+          </a>
+        </div>
+        <div class="nav__menu__btn" id="menu-btn">
+          <i class="ri-menu-line"></i>
+        </div>
+      </div>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#footer">Contact Us</a></li> <!-- Link updated -->
+      </ul>
+    </nav>
+    <header class="header__container">
+      <div class="header__image">
+        <img src="assets/header.jpg" alt="header" />
+      </div>
+      <div class="header__content">
+        <h2>Inspiring Tomorrow's Innovators!</h2>
+        <h1>
+          Unlock Creativity<br /><span class="h1__span-1">with</span>
+          <span class="h1__span-2">STEM Learning</span>
+        </h1>
+        <p>
+          Empowering students through hands-on STEM education. Learn Arduino, robotics, and programming with RoboVision. Unlock your potential, build real-world projects, and master future technologies today!
+        </p>
+        <div class="header__btn">
+          <a href="#about" class="btn">Learn More</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <div class="about-card">
+        <h2>About RoboVision</h2>
+        <p>
+          RoboVision is a forward-thinking educational platform dedicated to empowering students and professionals through hands-on STEM (Science, Technology, Engineering, and Mathematics) education. With a focus on emerging technologies like Arduino, robotics, AI, and programming, RoboVision provides immersive learning experiences designed to inspire creativity, critical thinking, and problem-solving skills in a supportive and engaging environment.
+        </p>
+        <p>
+          Our mission is to bridge the gap between theoretical knowledge and practical application, enabling learners to master the skills needed for success in today’s rapidly evolving technological landscape.
+        </p>
+        <p>
+          At RoboVision, we believe that every student has the potential to be a creator and innovator. Join us on this exciting journey towards a brighter future!
+        </p>
+      </div>
+    </section>
+
+    <footer id="footer">
+      <h2>Contact Us</h2>
+      <p>
+        For inquiries, collaborations, or more information about our programs, please reach out to us!
+      </p>
+      <p>Email: robovisionacademy@gmail.com</p>
+      <p>Phone: 9655613211</p>
+
+  <ul class="socials">
+    <li>
+      <a href="https://www.linkedin.com/company/robovision-academy/" target="_blank">
+        <i class="ri-linkedin-fill"></i>
+      </a>
+    </li>
+  </ul>
+      <p>&copy; 2024 Robovision. All rights reserved.</p>
+   
+    <script>
+      // Toggle navigation menu on mobile
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+      menuBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+    </script>
+  </body>
+</html>
